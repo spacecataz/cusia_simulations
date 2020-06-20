@@ -1,0 +1,4 @@
+#COMPONENTMAP
+GM  0 -26 -1 -1		GM runs on 0 to nProc-26 PE-s
+IM  1 -25 -2		IM runs on nProc-25 to nProc-2
+IE  0  -1 -1		IE runs on the last PE
