@@ -2,16 +2,18 @@
 T			DoEcho
 
 #DESCRIPTION
-Sept. 2017 Event: High Res
+High resolution idealized IMF BY simulation configuration.
 
 #TIMEACCURATE
 F			DoTimeAccurate
 
+#IDEALAXES
+
 #STARTTIME            
-2017			year
-09              	month
+2010			year
+03              	month
 06              	day
-18			hour
+20			hour
 00             		minute
 00              	second
 0.0			FracSecond
@@ -94,7 +96,7 @@ box			NameArea
 -32.0			xMinBox
 -16.0			yMinBox
 -16.0			zMinBox
- 12.0			xMaxBox
+ 16.0			xMaxBox
  16.0			yMaxBox
  16.0			zMaxBox
 
@@ -142,7 +144,7 @@ T                       UseCpcpBc  (rest is read if true)
 
 #SOLARWINDFILE
 T				UseSolarWindFile
-IMF.dat				NameSolarWindFile
+IMF_noBY.dat			NameSolarWindFile
 
 #SCHEME
 1			nOrder
@@ -165,7 +167,7 @@ T			DoSaveLo5Dgfile
 VAR step date		StringLogfile
 -1			DnSaveLogfile
 5.0			DtSaveLogfile
-dt rho mx my mz p bx by bz pmin pmax dst cpcpn
+dt rho mx my mz p bx by bz pmin pmax dst dst_sm cpcpn
 3.0			StringRFlux
 
 #DOAMR
@@ -174,12 +176,6 @@ T			DoAmr
 -1.0			DtAmr
 T			IsStrictAmr
 
-#MAGNETOMETER
-mags.dat		NameMagInputFile
-single			TypeFileOut
--1			DnOutput
-10.0			DtOutput
-
 #GEOMAGINDICES
 180			nSizeKpWindow [min]
 60.0			DtOutput      [sec]
@@ -187,33 +183,44 @@ single			TypeFileOut
 #MAGNETOMETERGRID
 real8			TypeFileMagGrid
 GEO			TypeCoordMagGrid
-360			nLonMagGrid
-86			nLatMagGrid
+72			nLonMagGrid
+34			nLatMagGrid
 0.			LonMinMagGrid
 360.			LonMaxMagGrid
-0.			LatMinMagGrid
+-85.			LatMinMagGrid
 85.			LatMaxMagGrid
 -1			DnSaveMagGrid
-10.0			DtSaveMagGrid
+60.0			DtSaveMagGrid
 
 #END_COMP GM -----------------------------------------------------------------
 
 #BEGIN_COMP IE ---------------------------------------------------------------
 
-#AURORALOVAL
-T             UseOval (rest of parameters read if true)
-T             UseOvalShift
-F             UseSubOvalConductance
-T             UseAdvancedOval
-F	      DoFitCircle
-
 #IONOSPHERE
 5                       TypeConductanceModel
 F                       UseFullCurrent
 F			UseFakeRegion2
-130.0                   F107Flux
+150.0                   F107Flux
 1.0                     StarLightPedConductance
 0.25                    PolarCapPedConductance
+
+#CONDUCTANCEFILES 
+cmee_hal_coeffs.dat	NameHalFile 
+cmee_ped_coeffs.dat 	NamePedFile
+
+#AURORALOVAL 
+T			UseOval (rest of parameters read if true) 
+T 			UseOvalShift 
+F 			UseSubOvalConductance 
+T 			UseAdvancedOval 
+F 			DoFitCircle (read if UseAdvancedOval is true)
+
+#USECMEE 
+T			UseCMEEFitting (rest of parameters read if true) 
+45 			LatNoConductanceSI (default) 
+7.5 			FactorHallCMEE (default) 
+5 			FactorPedCMEE (default)
+
 
 #BOUNDARY
 10.0			LatBoundary
@@ -311,7 +318,6 @@ parabola		TypeConservCrit_I
  5.0			xParabolaConserv
 15.0			yParabolaConserv
 
-! Setting 1
 #IMCOUPLING
 20.0                    TauCoupleIm
 T                       DoImSatTrace
@@ -325,7 +331,7 @@ F                       DoFixPolarRegion
 1e-5			pMinDim [nPa]
 
 #SAVEPLOT
-3                       nPlotFiles
+4                       nPlotFiles
 y=0 MHD idl             StringPlot
 -1                      DnSavePlot
 60.			DtSavePlot
@@ -338,6 +344,10 @@ z=0 ray idl             StringPlot
 -1                      DnSavePlot
 60.                     DtSavePlot
 -1.0                    DxSavePlot
+3d MHD idl              StringPlot
+-1                      DnSavePlot
+300.                    DtSavePlot
+-1			DxSavePlot
 
 #BORIS
 T			UseBorisCorrection
@@ -351,16 +361,28 @@ T			UseBorisCorrection
 
 #BEGIN_COMP IM ---------------------------------------------------------------
 
-! Number density fractions for H+ and O+. Has to add up to 1.0
-#COMPOSITION
-FIXED			 NameCompModel
-0.9                      FractionH
-0.1                      FractionO
+#SAVEPLOT
+60.0			DtOutput
+F			DoSaveFlux
+F			DoSaveDrifts
+F			DoSavePSD
+T			UseSeparatePlotFiles
 
-! Decay for RCM particle densities
+#TYPEBOUNDARY
+ellipse                 TypeBoundary
+
 #DECAY
-T 			UseDecay
-36000. 			DecayTimescale in seconds
+T                       UseDecay
+36000.0                 DecayTimescale [s]
+
+#COMPOSITION
+FIXED                   TypeComposition
+0.7                     DensityFraction H+
+0.3                     DensityFraction O+
+1.0                     DensityFraction e-
+
+#SAVELOG
+5.0			DtLogOut
 
 #END_COMP IM -----------------------------------------------------------------
 
@@ -375,10 +397,10 @@ aur idl                 StringPlot
 #END_COMP IE -----------------------------------------------------------------
 
 #ENDTIME            
-2017			year
-09              	month
-09              	day
-00			hour
+2010			year
+03              	month
+20              	day
+12			hour
 00             		minute
 00              	second
 0.0			FracSecond

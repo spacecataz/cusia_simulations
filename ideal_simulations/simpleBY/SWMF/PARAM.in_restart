@@ -5,7 +5,7 @@ T			DoEcho
 RESTART.in
 
 #DESCRIPTION
-Continue event simulation.
+Continue idealized event simulation.
 
 #TIMEACCURATE
 T			DoTimeAccurate
@@ -73,13 +73,7 @@ T                       UseCpcpBc  (rest is read if true)
 
 #SOLARWINDFILE
 T				UseSolarWindFile
-IMF.dat				NameSolarWindFile
-
-#MAGNETOMETER
-mags.dat		NameMagInputFile
-single			TypeFileOut
--1			DnOutput
-10.0			DtOutput
+IMF_noBY.dat			NameSolarWindFile
 
 #GEOMAGINDICES
 180			nSizeKpWindow [min]
@@ -88,14 +82,14 @@ single			TypeFileOut
 #MAGNETOMETERGRID
 real8			TypeFileMagGrid
 GEO			TypeCoordMagGrid
-360			nLonMagGrid
-86			nLatMagGrid
+72			nLonMagGrid
+34			nLatMagGrid
 0.			LonMinMagGrid
 360.			LonMaxMagGrid
-0.			LatMinMagGrid
+-85.			LatMinMagGrid
 85.			LatMaxMagGrid
 -1			DnSaveMagGrid
-10.0			DtSaveMagGrid
+60.0			DtSaveMagGrid
 
 #NONCONSERVATIVE
 T                       UseNonConservative
@@ -135,11 +129,11 @@ T			DoSaveLogfile
 VAR step date		StringLogfile
 -1			DnSaveLogfile
 1.0			DtSaveLogfile
-dt rho mx my mz p bx by bz pmin pmax dst cpcpn
+dt rho mx my mz p bx by bz pmin pmax dst dst_sm cpcpn
 3.0			StringRFlux
 
 #SAVEPLOT
-3                       nPlotFiles
+4                       nPlotFiles
 y=0 MHD idl             StringPlot
 -1                      DnSavePlot
 60.			DtSavePlot
@@ -152,6 +146,11 @@ z=0 ray idl             StringPlot
 -1                      DnSavePlot
 60.                     DtSavePlot
 -1.0                    DxSavePlot
+3d MHD idl              StringPlot
+-1                      DnSavePlot
+300.                    DtSavePlot
+-1			DxSavePlot
+
 
 #SCHEME
 2			nORDER
@@ -171,38 +170,61 @@ T			UseBorisCorrection
 
 #BEGIN_COMP IM ---------------------------------------------------------------
 
-#RESTART
-T			DoRestart
+#INCLUDE
+IM/restartIN/restart.H
 
-! Number density fractions for H+ and O+. Has to add up to 1.0
-#COMPOSITION
-FIXED			 NameCompModel
-0.9                      FractionH
-0.1                      FractionO
+#SAVEPLOT
+60.0			DtOutput
+F			DoSaveFlux
+F			DoSaveDrifts
+F			DoSavePSD
+T			UseSeparatePlotFiles
 
-! Decay for RCM particle densities
+#TYPEBOUNDARY
+ellipse                 TypeBoundary
+
 #DECAY
-T 			UseDecay
-36000. 			DecayTimescale in seconds
+T                       UseDecay
+36000.0                 DecayTimescale [s]
+
+#COMPOSITION
+FIXED                   TypeComposition
+0.7                     DensityFraction H+
+0.3                     DensityFraction O+
+1.0                     DensityFraction e-
+
+#SAVELOG
+5.0			DtLogOut
 
 #END_COMP IM -----------------------------------------------------------------
 
 #BEGIN_COMP IE ---------------------------------------------------------------
 
-#AURORALOVAL
-T             UseOval (rest of parameters read if true)
-T             UseOvalShift
-F             UseSubOvalConductance
-T             UseAdvancedOval
-F	      DoFitCircle
-
 #IONOSPHERE
 5                       TypeConductanceModel
 F                       UseFullCurrent
 F			UseFakeRegion2
-130.0                   F107Flux
+150.0                   F107Flux
 1.0                     StarLightPedConductance
 0.25                    PolarCapPedConductance
+
+
+#CONDUCTANCEFILES 
+cmee_hal_coeffs.dat	NameHalFile 
+cmee_ped_coeffs.dat 	NamePedFile
+
+#AURORALOVAL 
+T			UseOval (rest of parameters read if true) 
+T 			UseOvalShift 
+F 			UseSubOvalConductance 
+T 			UseAdvancedOval 
+F 			DoFitCircle (read if UseAdvancedOval is true)
+
+#USECMEE 
+T			UseCMEEFitting (rest of parameters read if true) 
+45 			LatNoConductanceSI (default) 
+7.5 			FactorHallCMEE (default) 
+5 			FactorPedCMEE (default)
 
 #BOUNDARY
 10.0                    LatBoundary
@@ -216,10 +238,10 @@ aur idl                 StringPlot
 #END_COMP IE -----------------------------------------------------------------
 
 #ENDTIME            
-2017			year
-09              	month
-09              	day
-00			hour
+2010			year
+03              	month
+20              	day
+12			hour
 00             		minute
 00              	second
 0.0			FracSecond
