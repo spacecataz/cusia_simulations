@@ -83,6 +83,12 @@ T                       UseCpcpBc  (rest is read if true)
 T				UseSolarWindFile
 IMF_noBY.dat			NameSolarWindFile
 
+#MAGPERTURBINTEGRAL
+T                       UseSurfaceIntegral
+T                       UseFastFacIntegral
+MAG                     TypeCoordIndex
+MAG                     TypeCoordFacGrid
+
 #GEOMAGINDICES
 180			nSizeKpWindow [min]
 60.0			DtOutput      [sec]

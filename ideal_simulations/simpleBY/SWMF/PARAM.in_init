@@ -181,6 +181,12 @@ T			DoAmr
 -1.0			DtAmr
 T			IsStrictAmr
 
+#MAGPERTURBINTEGRAL
+T                       UseSurfaceIntegral
+T                       UseFastFacIntegral
+MAG                     TypeCoordIndex
+MAG                     TypeCoordFacGrid
+
 #GEOMAGINDICES
 180			nSizeKpWindow [min]
 60.0			DtOutput      [sec]
