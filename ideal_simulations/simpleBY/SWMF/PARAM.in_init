@@ -17,8 +17,8 @@ F			DoTimeAccurate
 #STARTTIME            
 2010			year
 03              	month
-06              	day
-20			hour
+20              	day
+00			hour
 00             		minute
 00              	second
 0.0			FracSecond
