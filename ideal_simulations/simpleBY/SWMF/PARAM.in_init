@@ -1,6 +1,11 @@
 #ECHO
 T			DoEcho
 
+#COMPONENTMAP			For 128+ cores like production run
+GM  0 -26 -1 -1			GM runs on 0 to nProc-26 PE-s
+IM -25 -2  1			IM runs on nProc-25 to nProc-2
+IE  -1 -1  1			IE runs on the last PE
+
 #DESCRIPTION
 High resolution idealized IMF BY simulation configuration.
 
@@ -33,6 +38,9 @@ IE			NameComp2
 -1.0                    DtCouple
 
 #BEGIN_COMP GM ---------------------------------------------------------------
+
+#GRIDBLOCKALL
+5000			MaxBlock
 
 #GRID
 1			nRootBlock_D(x_)
@@ -133,9 +141,6 @@ float			TypeBc6
 #INNERBOUNDARY
 ionosphere		TypeBcInner
 
-#MAGNETICINNERBOUNDARY
-T               DoReflectInnerB1
-
 ! Set the inner boundary density as Rho0Cpcp + RhoPerCpcp*CPCP[keV]
 #CPCPBOUNDARY
 T                       UseCpcpBc  (rest is read if true)
@@ -228,7 +233,7 @@ T			UseCMEEFitting (rest of parameters read if true)
 #END_COMP IE -----------------------------------------------------------------
 
 #STOP
-700                     MaxIter
+1000                    MaxIter
 -1.			TimeMax
 
 #RUN	######################################################################
@@ -251,7 +256,7 @@ mc3                     TypeLimiter
 #END_COMP GM -----------------------------------------------------------------
 
 #STOP
-1500                    MaxIter
+5000                    MaxIter
 -1.			TimeMax
 
 #RUN	######################################################################
@@ -267,6 +272,9 @@ T			DoTimeAccurate
 T                       DoSaveRestart
 -1                      DnSaveRestart
 7200.0                    DtSaveRestart
+
+#RESTARTOUTDIR
+SWMF_RESTART.YYYYMMDD_HHMMSS            NameRestartOutDir
 
 #COMPONENT
 IM			NameComp
@@ -346,12 +354,24 @@ z=0 ray idl             StringPlot
 -1.0                    DxSavePlot
 3d MHD idl              StringPlot
 -1                      DnSavePlot
-300.                    DtSavePlot
+1800.                   DtSavePlot
 -1			DxSavePlot
 
 #BORIS
 T			UseBorisCorrection
 0.01			BorisClightFactor
+
+#REGION
+borisregion             NameArea
+sphere tapered          NameShape
+-4.0			xPosition
+0.0			yPosition
+0.0			zPosition
+14.0			Radius
+2.0			Taper
+
+#BORISREGION
+borisregion			NameBorisRegion
 
 #TIMESTEPPING
 1			nStage
@@ -362,24 +382,30 @@ T			UseBorisCorrection
 #BEGIN_COMP IM ---------------------------------------------------------------
 
 #SAVEPLOT
-60.0			DtOutput
+1 min			DtOutput
 F			DoSaveFlux
 F			DoSaveDrifts
 F			DoSavePSD
 T			UseSeparatePlotFiles
 
 #TYPEBOUNDARY
-ellipse                 TypeBoundary
+ellipse			TypeBoundary
 
 #DECAY
-T                       UseDecay
-36000.0                 DecayTimescale [s]
+T			UseDecay
+10 hour			DecayTimescale [s]
 
 #COMPOSITION
-FIXED                   TypeComposition
-0.7                     DensityFraction H+
-0.3                     DensityFraction O+
-1.0                     DensityFraction e-
+FIXED			TypeComposition
+0.7			DensityFraction H+
+0.3			DensityFraction O+
+1.0			DensityFraction e-
+
+#INITIALF2
+F			IsEmptyF2
+T			IsGmInitial
+F			IsDataInitial
+F			IsRBSPData
 
 #SAVELOG
 5.0			DtLogOut
