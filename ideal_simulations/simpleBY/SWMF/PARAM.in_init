@@ -55,7 +55,7 @@ IE			NameComp2
 
 ! Maximum resolution initially
 #GRIDRESOLUTION
-1.0			Resolution
+2.0			Resolution
 initial			NameArea
 
 ! Minimum resolution in the computational domain
@@ -262,7 +262,7 @@ mc3                     TypeLimiter
 #END_COMP GM -----------------------------------------------------------------
 
 #STOP
-5000                    MaxIter
+2000                    MaxIter
 -1.			TimeMax
 
 #RUN	######################################################################
@@ -388,11 +388,13 @@ borisregion			NameBorisRegion
 #BEGIN_COMP IM ---------------------------------------------------------------
 
 #SAVEPLOT
-1 min			DtOutput
-F			DoSaveFlux
-F			DoSaveDrifts
-F			DoSavePSD
-T			UseSeparatePlotFiles
+2			nCIMIFileType
+preci all       	StringPlot
+300.             	DtOutput
+F               	DoSaveSeparateFiles
+2d both         	StringPlot
+300.             	DtOutput
+
 
 #TYPEBOUNDARY
 ellipse			TypeBoundary
