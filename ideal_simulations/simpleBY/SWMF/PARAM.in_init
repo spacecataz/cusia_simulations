@@ -39,9 +39,6 @@ IE			NameComp2
 
 #BEGIN_COMP GM ---------------------------------------------------------------
 
-#GRIDBLOCKALL
-5000			MaxBlock
-
 #GRID
 1			nRootBlock_D(x_)
 1			nRootBlock_D(y_)
@@ -55,23 +52,13 @@ IE			NameComp2
 
 ! Maximum resolution initially
 #GRIDRESOLUTION
-1.0			Resolution
+2.0			Resolution
 initial			NameArea
 
 ! Minimum resolution in the computational domain
 #GRIDRESOLUTION
 8.0			Resolution
 all			NameArea
-
-#GRIDRESOLUTION
-1.0			Resolution
-box			NameArea
--100.0			xMinBox
- -16.0			yMinBox
- -16.0			zMinBox
-  32.0			xMaxBox
-  16.0			yMaxBox
-  16.0			zMaxBox
 
 ! Super high at inner boundary
 ! to capture outflow patterns.
@@ -87,21 +74,11 @@ box			NameArea
 
 ! Strong resolution just outside
 ! super-hi for clean outflow.
-#GRIDRESOLUTION
-1/8			Resolution
-box			NameArea
--8.0			xMinBox
--8.0                   	yMinBox
--8.0                   	zMinBox
- 8.0                   	xMaxBox
- 8.0                   	yMaxBox
- 8.0                   	zMaxBox
-
 ! Good res throughout lobes.
 #GRIDRESOLUTION
 1/4			Resolution
 box			NameArea
--32.0			xMinBox
+-20.0			xMinBox
 -16.0			yMinBox
 -16.0			zMinBox
  16.0			xMaxBox
@@ -112,7 +89,7 @@ box			NameArea
 #GRIDRESOLUTION
 1/2			Resolution
 box			NameArea
--40.0			xMinBox
+-36.0			xMinBox
 -24.0			yMinBox
 -24.0			zMinBox
  24.0			xMaxBox
