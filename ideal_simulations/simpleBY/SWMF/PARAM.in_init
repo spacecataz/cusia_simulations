@@ -76,14 +76,24 @@ box			NameArea
 ! super-hi for clean outflow.
 ! Good res throughout lobes.
 #GRIDRESOLUTION
+1/8
+box
+-10.0                   xMinBox
+-10.0                   yMinBox
+-10.0                   zMinBox
+ 10.0                   xMaxBox
+ 10.0                   yMaxBox
+ 10.0                   zMaxBox
+
+#GRIDRESOLUTION
 1/4			Resolution
 box			NameArea
--20.0			xMinBox
--16.0			yMinBox
--16.0			zMinBox
- 16.0			xMaxBox
- 16.0			yMaxBox
- 16.0			zMaxBox
+-24.0			xMinBox
+-20.0			yMinBox
+-20.0			zMinBox
+ 20.0			xMaxBox
+ 20.0			yMaxBox
+ 20.0			zMaxBox
 
 ! 1/2 RE buffer around inner mag.
 #GRIDRESOLUTION
