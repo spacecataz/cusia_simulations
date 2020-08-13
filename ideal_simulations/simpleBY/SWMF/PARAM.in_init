@@ -375,8 +375,11 @@ borisregion			NameBorisRegion
 #BEGIN_COMP IM ---------------------------------------------------------------
 
 #SAVEPLOT
-2			nCIMIFileType
-preci all       	StringPlot
+3			nCIMIFileType
+preci e 		StringPlot
+300.             	DtOutput
+F               	DoSaveSeparateFiles
+preci h 		StringPlot
 300.             	DtOutput
 F               	DoSaveSeparateFiles
 2d both         	StringPlot
