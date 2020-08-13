@@ -199,11 +199,15 @@ borisregion			NameBorisRegion
 IM/restartIN/restart.H
 
 #SAVEPLOT
-1 min			DtOutput
-F			DoSaveFlux
-F			DoSaveDrifts
-F			DoSavePSD
-T			UseSeparatePlotFiles
+3			nCIMIFileType
+preci e 		StringPlot
+300.             	DtOutput
+F               	DoSaveSeparateFiles
+preci h 		StringPlot
+300.             	DtOutput
+F               	DoSaveSeparateFiles
+2d both         	StringPlot
+300.             	DtOutput
 
 #TYPEBOUNDARY
 ellipse			TypeBoundary
