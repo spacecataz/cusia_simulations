@@ -1,0 +1,409 @@
+#ECHO
+T			DoEcho
+
+#COMPONENTMAP			For 128+ cores like production run
+GM  0 -26 -1 -1			GM runs on 0 to nProc-26 PE-s
+IM -25 -2  1			IM runs on nProc-25 to nProc-2
+IE  -1 -1  1			IE runs on the last PE
+
+#DESCRIPTION
+High resolution idealized IMF BY simulation configuration.
+
+#TIMEACCURATE
+F			DoTimeAccurate
+
+#IDEALAXES
+
+#STARTTIME            
+2010			year
+03              	month
+20              	day
+00			hour
+00             		minute
+00              	second
+0.0			FracSecond
+
+! Allow empty processor for IM
+#STRICT
+F			UseStrict
+
+#COMPONENT
+IM                      NameComp
+F                       UseComp
+
+#COUPLE2
+GM			NameComp1
+IE			NameComp2
+10                      DnCouple
+-1.0                    DtCouple
+
+#BEGIN_COMP GM ---------------------------------------------------------------
+
+#GRID
+1			nRootBlock_D(x_)
+1			nRootBlock_D(y_)
+1			nRootBlock_D(z_)
+-224.			xMin
+ 32.			xMax
+-128.			yMin
+ 128.			yMax
+-128.			zMin
+ 128.			zMax
+
+! Maximum resolution initially
+#GRIDRESOLUTION
+2.0			Resolution
+initial			NameArea
+
+! Minimum resolution in the computational domain
+#GRIDRESOLUTION
+8.0			Resolution
+all			NameArea
+
+! Super high at inner boundary
+! to capture outflow patterns.
+#GRIDRESOLUTION
+1/16			Resolution
+box			NameArea
+-4.0                   	xMinBox
+-4.0                   	yMinBox
+-4.0                   	zMinBox
+ 4.0			xMaxBox
+ 4.0                   	yMaxBox
+ 4.0                   	zMaxBox
+
+! Strong resolution just outside
+! super-hi for clean outflow.
+! Good res throughout lobes.
+#GRIDRESOLUTION
+1/8
+box
+-10.0                   xMinBox
+-10.0                   yMinBox
+-10.0                   zMinBox
+ 10.0                   xMaxBox
+ 10.0                   yMaxBox
+ 10.0                   zMaxBox
+
+#GRIDRESOLUTION
+1/4			Resolution
+box			NameArea
+-24.0			xMinBox
+-20.0			yMinBox
+-20.0			zMinBox
+ 20.0			xMaxBox
+ 20.0			yMaxBox
+ 20.0			zMaxBox
+
+! 1/2 RE buffer around inner mag.
+#GRIDRESOLUTION
+1/2			Resolution
+box			NameArea
+-36.0			xMinBox
+-24.0			yMinBox
+-24.0			zMinBox
+ 24.0			xMaxBox
+ 24.0			yMaxBox
+ 24.0			zMaxBox
+
+#BODY
+T                       UseBody
+2.5                     rBody     (in planet radius)
+3.0                     rCurrents (in planet radius)
+28.0                    BodyNDim  (/cc)
+25000.0                 BodyTDim  (K)
+
+#TIMESTEPPING
+1			nStage
+0.80			CflExlp
+
+#OUTERBOUNDARY
+outflow			TypeBc1
+vary			TypeBc2
+float			TypeBc3
+float			TypeBc4
+float			TypeBc5
+float			TypeBc6
+
+#INNERBOUNDARY
+ionosphere		TypeBcInner
+
+! Set the inner boundary density as Rho0Cpcp + RhoPerCpcp*CPCP[keV]
+#CPCPBOUNDARY
+T                       UseCpcpBc  (rest is read if true)
+28.0                    Rho0Cpcp   [amu/cc]
+0.1                     RhoPerCpcp [amu/cc / keV]
+
+#SOLARWINDFILE
+T				UseSolarWindFile
+IMF_noBY.dat			NameSolarWindFile
+
+#SCHEME
+1			nOrder
+Sokolov			TypeFlux
+
+#SAVELOGNAME
+F                       IsLogName_n
+T                       IsLogName_e
+
+#SAVEPLOTNAME
+F                       IsPlotName_n
+F                       IsPlotName_t
+T                       IsPlotName_e
+
+#PLOTFILENAME
+date			TimeUnitMax
+
+#SAVELOGFILE
+T			DoSaveLo5Dgfile
+VAR step date		StringLogfile
+-1			DnSaveLogfile
+5.0			DtSaveLogfile
+dt rho mx my mz p bx by bz pmin pmax dst dst_sm cpcpn
+3.0			StringRFlux
+
+#DOAMR
+T			DoAmr
+100			DnAmr
+-1.0			DtAmr
+T			IsStrictAmr
+
+#MAGPERTURBINTEGRAL
+T                       UseSurfaceIntegral
+T                       UseFastFacIntegral
+MAG                     TypeCoordIndex
+MAG                     TypeCoordFacGrid
+
+#GEOMAGINDICES
+180			nSizeKpWindow [min]
+60.0			DtOutput      [sec]
+
+#MAGNETOMETERGRID
+real8			TypeFileMagGrid
+GEO			TypeCoordMagGrid
+72			nLonMagGrid
+34			nLatMagGrid
+0.			LonMinMagGrid
+360.			LonMaxMagGrid
+-85.			LatMinMagGrid
+85.			LatMaxMagGrid
+-1			DnSaveMagGrid
+60.0			DtSaveMagGrid
+
+#END_COMP GM -----------------------------------------------------------------
+
+#BEGIN_COMP IE ---------------------------------------------------------------
+
+#IONOSPHERE
+5                       TypeConductanceModel
+F                       UseFullCurrent
+F			UseFakeRegion2
+150.0                   F107Flux
+1.0                     StarLightPedConductance
+0.25                    PolarCapPedConductance
+
+#CONDUCTANCEFILES 
+cmee_hal_coeffs.dat	NameHalFile 
+cmee_ped_coeffs.dat 	NamePedFile
+
+#AURORALOVAL 
+T			UseOval (rest of parameters read if true) 
+T 			UseOvalShift 
+F 			UseSubOvalConductance 
+T 			UseAdvancedOval 
+F 			DoFitCircle (read if UseAdvancedOval is true)
+
+#USECMEE 
+T			UseCMEEFitting (rest of parameters read if true) 
+45 			LatNoConductanceSI (default) 
+7.5 			FactorHallCMEE (default) 
+5 			FactorPedCMEE (default)
+
+
+#BOUNDARY
+10.0			LatBoundary
+
+#END_COMP IE -----------------------------------------------------------------
+
+#STOP
+1000                    MaxIter
+-1.			TimeMax
+
+#RUN	######################################################################
+
+#BEGIN_COMP GM ---------------------------------------------------------------
+
+#DOAMR
+F			DoAmr
+
+#SCHEME
+2			nORDER
+Sokolov			TypeFlux
+mc3                     TypeLimiter
+1.2			BetaLimiter
+
+#TIMESTEPPING
+1			nStage
+0.60			CflExlp
+
+#END_COMP GM -----------------------------------------------------------------
+
+#STOP
+2000                    MaxIter
+-1.			TimeMax
+
+#RUN	######################################################################
+
+#TIMEACCURATE
+T			DoTimeAccurate
+
+#PROGRESS
+1			DnProgressShort
+100			DnProgressLong
+
+#SAVERESTART
+T                       DoSaveRestart
+-1                      DnSaveRestart
+7200.0                    DtSaveRestart
+
+#RESTARTOUTDIR
+SWMF_RESTART.YYYYMMDD_HHMMSS            NameRestartOutDir
+
+#COMPONENT
+IM			NameComp
+T			UseComp
+
+! All processors are used now
+#STRICT
+T			UseStrict
+
+! Allow GM/IM and IE run in parallel. LAYOUT.in has to be properly set!
+#COUPLEORDER
+5			nCouple
+IE GM			NameSourceTarget
+IE IM			NameSourceTarget
+GM IE			NameSourceTarget
+GM IM			NameSourceTarget
+IM GM			NameSourceTarget
+
+#COUPLE2
+GM			NameComp1
+IE			NameComp2
+-1                      DnCouple
+5.0                     DtCouple
+
+#COUPLE2
+IM			NameComp1
+GM			NameComp2
+-1                      DnCouple
+10.0                    DtCouple
+
+#COUPLE1
+IE			NameComp1
+IM			NameComp2
+-1                      DnCouple
+10.0                    DtCouple
+
+#COUPLETIME
+GM			NameComp
+F			DoCoupleOnTime
+
+#BEGIN_COMP GM ---------------------------------------------------------------
+
+#NONCONSERVATIVE
+T                       UseNonConservative
+
+#CONSERVATIVECRITERIA
+1			nConservCrit
+parabola		TypeConservCrit_I
+ 5.0			xParabolaConserv
+15.0			yParabolaConserv
+
+#IMCOUPLING
+20.0                    TauCoupleIm
+T                       DoImSatTrace
+T                       DoCoupleImPressure
+T                       DoCoupleImDensity
+0.01			DensityCoupleFloor
+F                       DoFixPolarRegion
+
+! Pressures below pMinDim are replaced with pMinDim.
+#MINIMUMPRESSURE
+1e-5			pMinDim [nPa]
+
+#SAVEPLOT
+4                       nPlotFiles
+y=0 MHD idl             StringPlot
+-1                      DnSavePlot
+60.			DtSavePlot
+-1.0			DxSavePlot
+z=0 MHD idl             StringPlot
+-1                      DnSavePlot
+60.			DtSavePlot
+-1.0			DxSavePlot
+z=0 ray idl             StringPlot
+-1                      DnSavePlot
+60.                     DtSavePlot
+-1.0                    DxSavePlot
+3d MHD idl              StringPlot
+-1                      DnSavePlot
+1800.                   DtSavePlot
+-1			DxSavePlot
+
+#BORIS
+T			UseBorisCorrection
+0.01			BorisClightFactor
+
+#REGION
+borisregion             NameArea
+sphere tapered          NameShape
+-4.0			xPosition
+0.0			yPosition
+0.0			zPosition
+14.0			Radius
+2.0			Taper
+
+#BORISREGION
+borisregion			NameBorisRegion
+
+#TIMESTEPPING
+1			nStage
+0.85			CflExpl
+
+#END_COMP GM -----------------------------------------------------------------
+
+#BEGIN_COMP IM ---------------------------------------------------------------
+
+! Number density fractions for H+ and O+. Has to add up to 1.0
+#COMPOSITION
+FIXED			NameCompModel
+0.8			FractionH
+0.2			FractionO
+
+! Decay for RCM particle densities
+#DECAY
+T 			UseDecay
+10 hour			DecayTimescale
+
+#END_COMP IM -----------------------------------------------------------------
+
+#BEGIN_COMP IE ---------------------------------------------------------------
+
+#SAVEPLOT
+1			nPlotFile
+aur idl                 StringPlot
+-1                      DnSavePlot
+60.0			DtSavePlot
+
+#END_COMP IE -----------------------------------------------------------------
+
+#ENDTIME            
+2010			year
+03              	month
+20              	day
+12			hour
+00             		minute
+00              	second
+0.0			FracSecond
+
+#END ############################################################
