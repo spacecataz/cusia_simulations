@@ -105,6 +105,12 @@ GEO			TypeCoordMagGrid
 -1			DnSaveMagGrid
 60.0			DtSaveMagGrid
 
+#MAGNETOMETER
+mags_all.dat                   NameMagInputFile
+single                  TypeFileOut
+-1                      DnOutput
+1 min                   DtOutput
+
 #SATELLITE
 15                      nSatellite
 MHD RAY date time       StringSatellite
