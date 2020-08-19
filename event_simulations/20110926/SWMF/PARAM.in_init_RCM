@@ -2,9 +2,9 @@
 T			DoEcho
 
 #COMPONENTMAP			For 128+ cores like production run
-GM  0 -26 -1 -1			GM runs on 0 to nProc-26 PE-s
-IM -25 -2  1			IM runs on nProc-25 to nProc-2
-IE  -1 -1  1			IE runs on the last PE
+GM  0 -3 -1  -1         GM runs on 0:nProc-3 multithreaded
+IE -2 -1  1             IE runs on last 2 PE-s
+IM -2 -2  1             IM runs on nProc-2 PE
 
 #DESCRIPTION
 High resolution idealized IMF BY simulation configuration.
