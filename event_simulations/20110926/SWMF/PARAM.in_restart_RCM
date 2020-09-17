@@ -185,7 +185,7 @@ parabola                TypeConservCrit_I
 
 #IMCOUPLING
 20.0                    TauCoupleIm
-T                       DoImSatTrace
+F                       DoImSatTrace
 T                       DoCoupleImPressure
 T                       DoCoupleImDensity
 0.01			DensityCoupleFloor
