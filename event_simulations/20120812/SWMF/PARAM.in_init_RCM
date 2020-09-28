@@ -13,13 +13,13 @@ High resolution idealized IMF BY simulation configuration.
 F			DoTimeAccurate
 
 #STARTTIME            
-2011			year
-09              	month
-26              	day
-10			hour
+2012			    year
+10              	month
+08              	day
+01			        hour
 00             		minute
 00              	second
-0.0			FracSecond
+0.0			        FracSecond
 
 ! Allow empty processor for IM
 #STRICT
@@ -134,7 +134,7 @@ T                       UseCpcpBc  (rest is read if true)
 
 #SOLARWINDFILE
 T				UseSolarWindFile
-imf20110926.dat			NameSolarWindFile
+imf20121008.dat			NameSolarWindFile
 
 #SCHEME
 1			nOrder
@@ -264,8 +264,8 @@ themise.sat
 #IONOSPHERE
 5                       TypeConductanceModel
 F                       UseFullCurrent
-F			UseFakeRegion2
-149.0                   F107Flux
+F	                    UseFakeRegion2
+105.9                   F107Flux
 1.0                     StarLightPedConductance
 0.25                    PolarCapPedConductance
 
@@ -465,12 +465,12 @@ aur idl                 StringPlot
 #END_COMP IE -----------------------------------------------------------------
 
 #ENDTIME            
-2011	    		year
-09              	month
-27              	day
-10			hour
+2012	    		year
+10              	month
+09              	day
+12			        hour
 00             		minute
 00              	second
-0.0			FracSecond
+0.0			        FracSecond
 
 #END ############################################################
