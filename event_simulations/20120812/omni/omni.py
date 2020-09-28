@@ -126,7 +126,7 @@ def omni_to_swmf(infile, pair, outfile=None):
     from spacepy.pybats import ImfInput
     from spacepy.time import Ticktock
     from spacepy.coordinates import Coords
-    #from validate.py import pairtimeseries_linear as pair
+    from validate import pairtimeseries_linear as pair
 
     # Variable name mapping:
     omVar = ['BX', 'BY', 'BZ', 'Vx Velocity', 'Vy Velocity', 'Vz Velocity', 'Proton Density', 'Temperature']
