@@ -1,4 +1,4 @@
-October. 09 2012 Event
+October 8-9 2012 Event
 -------------------
 
 This event features a strong, negative IMF By understorm time conditions.
