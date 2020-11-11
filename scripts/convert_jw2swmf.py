@@ -162,7 +162,7 @@ if __name__ == '__main__':
         imf[v] = pdata[v]
 
     # Set filename, attributes:
-    imf.attrs['file'] = f'imf_{mdata["time"][0]:%Y%m%d}.dat'
+    imf.attrs['file'] = f'imf{mdata["time"][0]:%Y%m%d}.dat'
     imf.attrs['header'].append("Converted from Weygand propagted files:")
     imf.attrs['header'].append(f"\n\t{pfile}")
     imf.attrs['header'].append(f"\n\t{mfile}")
