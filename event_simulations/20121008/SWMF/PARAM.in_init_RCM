@@ -195,7 +195,7 @@ single                  TypeFileOut
 1 min                   DtOutput
 
 #SATELLITE
-15                      nSatellite
+17                      nSatellite
 MHD RAY date time       StringSatellite
 -1                      DnOutput
 15.0                    DtOutput
@@ -256,6 +256,14 @@ MHD RAY date time       StringSatellite
 -1                      DnOutput
 15.0                    DtOutput
 themise.sat
+MHD RAY date time       StringSatellite
+-1                      DnOutput
+15.0                    DtOutput
+rbspa.sat
+MHD RAY date time       StringSatellite
+-1                      DnOutput
+15.0                    DtOutput
+rbspb.sat
 
 #END_COMP GM -----------------------------------------------------------------
 
