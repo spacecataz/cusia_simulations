@@ -219,7 +219,7 @@ date			TimeUnitMax
 T			DoSaveLogfile
 VAR step date		StringLogfile
 -1			DnSaveLogfile
-1.0			DtSaveLogfile
+5.0			DtSaveLogfile
 dt rho mx my mz p bx by bz pmin pmax dst dst_sm cpcpn
 3.0			StringRFlux
 
