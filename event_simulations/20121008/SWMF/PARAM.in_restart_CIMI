@@ -305,7 +305,7 @@ F			UseYoungEtAl
 #PRERUNFIELD
 T			DoWritePrerunField
 
-#PRERUNSAT
+PRERUNSAT
 T			DoWritePrerunSat
 
 #SAVEPLOT
