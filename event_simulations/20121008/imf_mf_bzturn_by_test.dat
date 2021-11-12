@@ -1,0 +1,15 @@
+8 minutes northward, 8 mintues southward, all solar wind fluid.
+This version has a BY component for examining separatrix regions.
+Use with ModEquationRecircPe 
+FOR TESTING PURPOSES.
+
+#TIMEDELAY
+      0.00000
+#VAR
+bx by bz ux uy uz n HpRho HpPsRho t
+
+#START
+ 1998  5  4  0 00 00 000  00.00   2.00     5.00  -450.00  00.00  00.00  8.700  8.699  0.001  1.20E+05
+ 1998  5  4  0 14 59 000  00.00   2.00     5.00  -450.00  00.00  00.00  8.700  8.699  0.001  1.20E+05
+ 1998  5  4  0 15 00 000  00.00   2.00   -10.00  -450.00  00.00  00.00  8.700  8.699  0.001  1.20E+05
+ 1998  5  4  1 59 59 000  00.00   2.00   -10.00  -450.00  00.00  00.00  8.700  8.699  0.001  1.20E+05
