@@ -142,6 +142,15 @@ IMF_noBY.dat			NameSolarWindFile
 1			nOrder
 Sokolov			TypeFlux
 
+#NONCONSERVATIVE
+T                       UseNonConservative
+
+#CONSERVATIVECRITERIA
+1			nConservCrit
+parabola		TypeConservCrit_I
+ 5.0			xParabolaConserv
+15.0			yParabolaConserv
+
 #SAVELOGNAME
 F                       IsLogName_n
 T                       IsLogName_e
@@ -312,15 +321,6 @@ GM			NameComp
 F			DoCoupleOnTime
 
 #BEGIN_COMP GM ---------------------------------------------------------------
-
-#NONCONSERVATIVE
-T                       UseNonConservative
-
-#CONSERVATIVECRITERIA
-1			nConservCrit
-parabola		TypeConservCrit_I
- 5.0			xParabolaConserv
-15.0			yParabolaConserv
 
 #IMCOUPLING
 20.0                    TauCoupleIm
