@@ -1,0 +1,86 @@
+#SATELLITE
+21			nSatellite
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+cluster1.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+cluster2.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+cluster3.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+cluster4.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+goes13.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+goes14.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+goes15.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+goes16.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+goes17.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+geotail.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+themisa.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+themisb.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+themisc.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+themisd.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+themise.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+rbspa.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+rbspb.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+mms1.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+mms2.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+mms3.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+mms4.sat
