@@ -94,85 +94,26 @@ MAG                     TypeCoordFacGrid
 60.0			DtOutput      [sec]
 
 #MAGNETOMETERGRID
-real8			TypeFileMagGrid
-GEO			TypeCoordMagGrid
-72			nLonMagGrid
-34			nLatMagGrid
-0.			LonMinMagGrid
-360.			LonMaxMagGrid
--85.			LatMinMagGrid
-85.			LatMaxMagGrid
--1			DnSaveMagGrid
-60.0			DtSaveMagGrid
+1			        nMagGridFile
+global real4		StrGridFileOut
+GEO			        TypeCoordGrid
+360			        nGridLon
+171			        nGridLat
+0.			        GridLonMin
+360.			    GridLonMax
+-85.			    GridLatMin
+85.			        GridLatMax
+-1			        DnSaveMagGrid
+1 min			    DtSaveMagGrid
 
 #MAGNETOMETER
-mags_all.dat                   NameMagInputFile
+mags_all.dat            NameMagInputFile
 single                  TypeFileOut
 -1                      DnOutput
 1 min                   DtOutput
 
-#SATELLITE
-15                      nSatellite
-MHD RAY date time       StringSatellite
--1                      DnOutput
-15.0                    DtOutput
-cluster1.sat
-MHD RAY date time       StringSatellite
--1                      DnOutput
-15.0                    DtOutput
-cluster2.sat
-MHD RAY date time       StringSatellite
--1                      DnOutput
-15.0                    DtOutput
-cluster3.sat
-MHD RAY date time       StringSatellite
--1                      DnOutput
-15.0                    DtOutput
-cluster4.sat
-MHD RAY date time       StringSatellite
--1                      DnOutput
-15.0                    DtOutput
-goes11.sat
-MHD RAY date time       StringSatellite
--1                      DnOutput
-15.0                    DtOutput
-goes12.sat
-MHD RAY date time       StringSatellite
--1                      DnOutput
-15.0                    DtOutput
-goes13.sat
-MHD RAY date time       StringSatellite
--1                      DnOutput
-15.0                    DtOutput
-goes14.sat
-MHD RAY date time       StringSatellite
--1                      DnOutput
-15.0                    DtOutput
-goes15.sat
-MHD RAY date time       StringSatellite
--1                      DnOutput
-15.0                    DtOutput
-geotail.sat
-MHD RAY date time       StringSatellite
--1                      DnOutput
-15.0                    DtOutput
-themisa.sat
-MHD RAY date time       StringSatellite
--1                      DnOutput
-15.0                    DtOutput
-themisb.sat
-MHD RAY date time       StringSatellite
--1                      DnOutput
-15.0                    DtOutput
-themisc.sat
-MHD RAY date time       StringSatellite
--1                      DnOutput
-15.0                    DtOutput
-themisd.sat
-MHD RAY date time       StringSatellite
--1                      DnOutput
-15.0                    DtOutput
-themise.sat
+#INCLUDE
+sats.include
 
 #NONCONSERVATIVE
 T                       UseNonConservative
@@ -216,15 +157,15 @@ dt rho mx my mz p bx by bz pmin pmax dst dst_sm cpcpn
 3.0			StringRFlux
 
 #SAVEPLOT
-4                       nPlotFiles
+8                       nPlotFiles
 y=0 MHD idl             StringPlot
 -1                      DnSavePlot
-60.			DtSavePlot
--1.0			DxSavePlot
+60.                     DtSavePlot
+-1.0                    DxSavePlot
 z=0 MHD idl             StringPlot
 -1                      DnSavePlot
-60.			DtSavePlot
--1.0			DxSavePlot
+60.                     DtSavePlot
+-1.0                    DxSavePlot
 z=0 ray idl             StringPlot
 -1                      DnSavePlot
 60.                     DtSavePlot
@@ -232,7 +173,42 @@ z=0 ray idl             StringPlot
 3d MHD idl              StringPlot
 -1                      DnSavePlot
 1800.                   DtSavePlot
--1			DxSavePlot
+-1                      DxSavePlot
+lcb nul tec		        StringPlot  !last closed field line plots
+-1  			        DnSavePlot  !Tecplot (ONLY!)
+5 min			        DtSavePlot
+5.			            Radius
+36			            nLon
+cut MHD idl             StringPlot
+-1                      DnSavePlot
+60.                     DtSavePlot
+-15.                    Coord1MinCut
+-15.                    Coord1MaxCut
+-128.                   Coord2MinCut
+128.                    Coord2MaxCut
+-128.                   Coord3MinCut
+128.                    Coord3MaxCut
+-1.                     DxSavePlot
+cut MHD idl             StringPlot
+-1                      DnSavePlot
+60.                     DtSavePlot
+-20.                    Coord1MinCut
+-20.                    Coord1MaxCut
+-128.                   Coord2MinCut
+128.                    Coord2MaxCut
+-128.                   Coord3MinCut
+128.                    Coord3MaxCut
+-1.                     DxSavePlot
+cut MHD idl             StringPlot
+-1                      DnSavePlot
+60.                     DtSavePlot
+-25.                    Coord1MinCut
+-25.                    Coord1MaxCut
+-128.                   Coord2MinCut
+128.                    Coord2MaxCut
+-128.                   Coord3MinCut
+128.                    Coord3MaxCut
+-1.                     DxSavePlot
 
 #SCHEME
 2			nORDER
@@ -285,32 +261,6 @@ T 			UseDecay
 #RESTART
 T			DoRestart
 
-#IONOSPHERE
-5                       TypeConductanceModel
-F                       UseFullCurrent
-F			UseFakeRegion2
-149.0                   F107Flux
-1.0                     StarLightPedConductance
-0.25                    PolarCapPedConductance
-
-
-#CONDUCTANCEFILES 
-cmee_hal_coeffs.dat	NameHalFile 
-cmee_ped_coeffs.dat 	NamePedFile
-
-#AURORALOVAL 
-T			UseOval (rest of parameters read if true) 
-T 			UseOvalShift 
-F 			UseSubOvalConductance 
-T 			UseAdvancedOval 
-F 			DoFitCircle (read if UseAdvancedOval is true)
-
-#USECMEE 
-T			UseCMEEFitting (rest of parameters read if true) 
-45 			LatNoConductanceSI (default) 
-7.5 			FactorHallCMEE (default) 
-5 			FactorPedCMEE (default)
-
 #BOUNDARY
 10.0                    LatBoundary
 
@@ -322,7 +272,7 @@ max idl                 StringPlot
 
 #END_COMP IE -----------------------------------------------------------------
 
-#ENDTIME            
+#ENDTIME
 2011	    		year
 09              	month
 27              	day
