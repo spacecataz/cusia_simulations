@@ -1,0 +1,34 @@
+#SATELLITE
+8			nSatellite
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+cluster1.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+cluster2.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+cluster3.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+cluster4.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+goes08.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+goes10.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+goes11.sat
+MHD RAY date time	StringSatellite
+-1			DnOutput
+15.0			DtOutput
+geotail.sat
