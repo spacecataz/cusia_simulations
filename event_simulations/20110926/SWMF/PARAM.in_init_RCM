@@ -134,7 +134,7 @@ T                       UseCpcpBc  (rest is read if true)
 
 #SOLARWINDFILE
 T				UseSolarWindFile
-imf20110926.dat			NameSolarWindFile
+IMF.dat			NameSolarWindFile
 
 #SCHEME
 1			nOrder
