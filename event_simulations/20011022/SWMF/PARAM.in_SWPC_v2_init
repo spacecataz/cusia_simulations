@@ -243,10 +243,6 @@ SWMF_RESTART.YYYYMMDD_HHMMSS		NameRestartOutDir
 IM			NameComp
 T			UseComp
 
-#COMPONENT
-RB			NameComp
-T			UseComp
-
 ! Allow GM/IM and IE run in parallel. #COMPONENTMAP has to be properly set!
 #COUPLEORDER
 5			nCouple
