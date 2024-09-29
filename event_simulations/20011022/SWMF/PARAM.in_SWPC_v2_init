@@ -163,10 +163,10 @@ T			IsStrictAmr
 sats.include
 
 #MAGNETOMETER
-magin_GEM.dat		NameMagInputFile
+mags_all.dat		NameMagInputFile
 single			TypeFileOut
 -1			DnOutput
-20			DtOutput
+60			DtOutput
 
 #GEOMAGINDICES
 180			nSizeKpWindow [min]
